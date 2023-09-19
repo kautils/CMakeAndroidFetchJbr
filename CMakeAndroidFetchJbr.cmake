@@ -28,10 +28,12 @@ macro(CMakeAndroidFetchJbr __jbr)
         endforeach()
     endif()
     
-    set(${__jbr}.javac ${${m}_JBR_ID}/bin/javac.exe)
     set(${__jbr}.id ${${m}_JBR_ID})
     set(${__jbr}.dir "${${m}_DESTINATION}/jbr/${${m}_JBR_ID}")
-        
+    set(${__jbr}.javac ${__jbr}.dir/bin/javac.exe)
+    
+    
+    
     if(NOT EXISTS ${${__jbr}.dir})
         CMakeFetchZip(
             SOURCE  ${${m}_SOURCE}
