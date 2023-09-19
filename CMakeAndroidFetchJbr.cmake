@@ -1,4 +1,15 @@
 
+macro(git_clone url)
+    get_filename_component(file_name ${url} NAME)
+    if(NOT EXISTS ${KAUTIL_THIRD_PARTY_DIR}/kautil_cmake/${file_name})
+        file(DOWNLOAD ${url} "${KAUTIL_THIRD_PARTY_DIR}/kautil_cmake/${file_name}")
+    endif()
+    include("${KAUTIL_THIRD_PARTY_DIR}/kautil_cmake/${file_name}")
+    unset(file_name)
+endmacro()
+git_clone(https://raw.githubusercontent.com/kautils/CMakeFetchZip/v0.0.1/CMakeFetchZip.cmake)
+
+
 macro(CMakeAndroidFetchJbr __jbr)
     
     set(${PROJECT_NAME}_m_evacu ${m})
@@ -31,6 +42,8 @@ macro(CMakeAndroidFetchJbr __jbr)
     set(${__jbr}.id ${${m}_JBR_ID})
     set(${__jbr}.dir "${${m}_DESTINATION}/jbr/${${m}_JBR_ID}")
     set(${__jbr}.javac ${${__jbr}.dir}/bin/javac.exe)
+    set(${__jbr}.jar ${${__jbr}.dir}/bin/jar.exe)
+    
     
     if(NOT EXISTS ${${__jbr}.dir})
         CMakeFetchZip(
