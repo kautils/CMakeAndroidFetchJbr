@@ -30,7 +30,7 @@ macro(CMakeAndroidFetchJbr __jbr)
     
     set(${__jbr}.id ${${m}_JBR_ID})
     set(${__jbr}.dir "${${m}_DESTINATION}/jbr/${${m}_JBR_ID}")
-    set(${__jbr}.javac ${__jbr}.dir/bin/javac.exe)
+    set(${__jbr}.javac ${${__jbr}.dir}/bin/javac.exe)
     
     
     
