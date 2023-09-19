@@ -32,8 +32,6 @@ macro(CMakeAndroidFetchJbr __jbr)
     set(${__jbr}.dir "${${m}_DESTINATION}/jbr/${${m}_JBR_ID}")
     set(${__jbr}.javac ${${__jbr}.dir}/bin/javac.exe)
     
-    
-    
     if(NOT EXISTS ${${__jbr}.dir})
         CMakeFetchZip(
             SOURCE  ${${m}_SOURCE}
@@ -53,6 +51,14 @@ macro(CMakeAndroidFetchJbr __jbr)
             file(REMOVE_RECURSE ${${__jbr}.dir}.buf)
         endif()
     endif()
+    
+    if(NOT EXISTS ${${__jbr}.dir})
+        message(FATAL_ERROR "jbr was not found. may be fail to fetch : ${${__jbr}.dir}")
+    endif()
+    if(NOT EXISTS ${${__jbr}.javac})
+        message(FATAL_ERROR "javac was not found. may be fail to fetch : ${${__jbr}.dir}")
+    endif()
+    
     
     foreach(__v ${${m}_unsetter})
         unset(${__v})
